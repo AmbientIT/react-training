@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import TodoCard from '../todoCard/TodoCard';
 import Button from '../button/Button';
 
-const ProfileList = ({ list, removeItem, updateItem }) => {
+const TodoList = ({ list, removeItem, updateItem }) => {
   return (
     <div className="p2 border">
       {
@@ -44,7 +44,7 @@ const ProfileList = ({ list, removeItem, updateItem }) => {
   );
 };
 
-ProfileList.propTypes = {
+TodoList.propTypes = {
   /**
    * Tableau de todo à afficher
    */
@@ -55,10 +55,10 @@ ProfileList.propTypes = {
   removeItem: PropTypes.func,
   updateItem: PropTypes.func,
 };
-ProfileList.defaultProps = {
+TodoList.defaultProps = {
   list: [],
   removeItem: () => {},
   updateItem: () => {},
 };
 
-export default ProfileList;
+export default TodoList;
