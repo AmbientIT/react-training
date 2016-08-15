@@ -11,9 +11,11 @@ module.exports = function(config) {
     ],
     preprocessors: {
       'src/**/*.js': ['webpack', 'sourcemap'],
+      'src/**/*.jsx': ['webpack', 'sourcemap'],
     },
     webpack: {
       devtool: 'inline-source-map',
+      resolve: webpackConfig.resolve,
       module: {
         loaders: webpackConfig.module.loaders,
         postLoaders: [
