@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    main: './platform/browser/index.jsx'
+    main: './src/platform/browser/index.jsx'
   },
   output: {
     path: 'dist',
