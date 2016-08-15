@@ -16,9 +16,16 @@ export default () => {
           <Button
             status="danger"
             type="button"
-            onClick={() => console.log('clicked')}
+            onClick={() => console.log('remove')}
           >
-            Delete
+            Remove
+          </Button>
+          <Button
+            status="danger"
+            type="button"
+            onClick={() => console.log('done')}
+          >
+            Done
           </Button>
         </p>
       </TodoCard>
