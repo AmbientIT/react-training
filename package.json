@@ -11,7 +11,7 @@
     "test": "karma start",
     "webdriver-update": "webdriver-manager update"
   },
-  "author": "Chazz <charles.jacquin@autistici.org>",
+  "author": "Charl--- <charles.jacquin@autistici.org>",
   "dependencies": {
     "axios": "^0.13.1",
     "classnames": "^2.2.5",
@@ -26,6 +26,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
+    "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.2.0",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-loader": "^1.5.0",
@@ -53,5 +54,10 @@
     "webpack-dev-server": "^2.1.0-beta.0",
     "webpack-merge": "^0.14.0",
     "yargs": "^4.8.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

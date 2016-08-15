@@ -9,11 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const ENV = require('yargs').argv.env || 'development';
 
-
-
 module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
   entry: {
-    vendor: './src/app/vendor',
     main: './src/app/index'
   },
   output: {
