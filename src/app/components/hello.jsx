@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-export class Hello extends Component {
-  static get propTypes() {
-    return {
-      age: React.PropTypes.number,
-      name: React.PropTypes.string,
-    };
+export default class Hello extends Component {
+  static propTypes = {
+    age: React.PropTypes.number,
+    name: React.PropTypes.string,
   }
 
-  static get defaultProp() {
-    return {
-      age: '14',
-      name: 'jonsnow',
-    };
-  }
+  static defaultProp = {
+    age: '14',
+    name: 'jonsnow',
+  };
 
   constructor(props)	{
     super(props);

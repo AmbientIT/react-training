@@ -1,23 +1,25 @@
 /*eslint-disable*/
 
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-  devtool: 'source-map',
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: "babel",
-      query: {
-        presets: [ 'es2015', 'react' ]
-      }
-    }]
+  devtool: 'eval',
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './platform/browser/index.jsx',
+  ],
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   devServer: {
     port: 3000,
     host: 'localhost',
-    historyApiFallback: true
+    historyApiFallback: true,
+    hot: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

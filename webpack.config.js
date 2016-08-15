@@ -10,33 +10,25 @@ const path = require('path');
 const ENV = require('yargs').argv.env || 'development';
 
 module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
-  entry: {
-    main: './src/app/index'
-  },
-  output: {
-    path: 'dist',
-    filename: '[name].[hash].bundle.js',
-    sourceMapFilename: '[name].[hash].map'
-  },
   resolve: {
-    extensions: ['', '.ts', '.js', '.json'],
+    extensions: ['', '.jsx', '.js', '.json'],
     modulesDirectories: ['node_modules']
   },
   module: {
     preLoaders: [
      {
-       test: /\.js$/,
+       test: /\.jsx|.js$/,
        loaders: ['eslint-loader', 'source-map-loader'],
        exclude: /node_modules/,
      },
    ],
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx|.js$/,
         exclude: /node_modules/,
         loader: "babel",
         query: {
-          presets: [ 'es2015', 'react' ]
+          presets: [ 'es2015-native-modules', 'stage-0', 'react' ]
         }
       },
       {
@@ -45,12 +37,7 @@ module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
       },
       {
         test: /\.css$/,
-        loaders: ['to-string-loader', 'css-loader']
-      },
-      {
-        test: /\.html$/,
-        loader: 'raw-loader',
-        exclude: ['src/index.html']
+        loaders: ['style-loader', 'css-loader']
       },
       {
         test: /\.(gif|png|jpe?g)$/i,

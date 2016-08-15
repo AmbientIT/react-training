@@ -1,7 +1,7 @@
 import React from	'react';
-import { Hello } from	'./hello';
+import Hello from	'./hello';
 
-export class	Form extends React.Component {
+export default class	Form extends React.Component {
   constructor(props)	{
     super(props);
     this.state = { name: '' };
