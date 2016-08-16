@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
       });
       break;
     default:
-      break;
+      return state;
   }
-  return state;
+  return Object.assign({}, state);
 };

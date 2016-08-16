@@ -1,14 +1,20 @@
 import React from 'react';
 import { AppContainer } from 'react-hot-loader';
 import { render } from 'react-dom';
-
+import { Provider } from 'react-redux';
+import configureStore from '../../app/store';
 import AppRouter from '../../app/appRoutes';
+
+const store = configureStore();
+
 
 const rootEl = window.document.getElementById('app-container');
 
 render(
   <AppContainer>
-    <AppRouter />
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
   </AppContainer>,
   rootEl
 );
@@ -19,7 +25,9 @@ if (module.hot) {
 
     render(
       <AppContainer>
-        <NextRouter />
+        <Provider store={store}>
+          <NextRouter />
+        </Provider>
       </AppContainer>
       , rootEl
     );

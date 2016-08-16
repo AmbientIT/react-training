@@ -28,7 +28,8 @@ module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
         exclude: /node_modules/,
         loader: "babel",
         query: {
-          presets: [ 'es2015-native-modules', 'stage-0', 'react' ]
+          presets: [ 'es2015-native-modules', 'stage-0', 'react' ],
+          plugins: ['transform-decorators-legacy'],
         }
       },
       {

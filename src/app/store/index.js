@@ -41,5 +41,3 @@ function configureStore(initialState = {}) {
 }
 
 export default configureStore;
-
-export const store = configureStore();
