@@ -28,7 +28,6 @@ export default (state = initialState, action) => {
       state.list = state.list.filter(todo => todo.get('id') !== action.payload);
       break;
     case TODO_TOGGLE_ISDONE:
-      console.log(state);
       state.list = state.list.map(todo => {
         return todo.get('id') === action.payload.get('id')
           ? action.payload.update('isDone', value => !value)
