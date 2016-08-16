@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-import { addTodo, removeTodo, todoTogleIsDone } from '../../actions/todoCrud';
+import { bindActionCreators } from 'redux';
+import * as todoActionsCreators from '../../actions/todoCrud';
 import { store } from '../../store';
 import TodoForm from '../../components/todoForm/TodoForm';
 import TodoList from '../../components/todoList/TodoList';
@@ -15,6 +15,8 @@ class Todo extends Component {
       description: '',
       list: store.getState().todos.list,
     };
+
+    this.todoActionsCreators = bindActionCreators(todoActionsCreators, store.dispatch);
   }
 
   componentDidMount() {
@@ -36,7 +38,7 @@ class Todo extends Component {
   }
 
   onFormSubmit = () => {
-    addTodo({
+    this.todoActionsCreators.addTodo({
       title: this.state.title,
       description: this.state.description,
     });
@@ -56,8 +58,8 @@ class Todo extends Component {
         />
         <TodoList
           list={list}
-          removeItem={removeTodo}
-          updateItem={todoTogleIsDone}
+          removeItem={this.todoActionsCreators.removeTodo}
+          updateItem={this.todoActionsCreators.todoTogleIsDone}
         />
       </div>
     );
