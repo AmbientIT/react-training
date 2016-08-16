@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Map, List } from 'immutable';
 
+import { TODO_ADD, TODO_REMOVE, TODO_TOGGLE_ISDONE } from '../../constants/todoCrud';
+import { store } from '../../store';
 import TodoForm from '../../components/todoForm/TodoForm';
 import TodoList from '../../components/todoList/TodoList';
+
 
 class Todo extends Component {
   constructor(props) {
@@ -11,37 +13,20 @@ class Todo extends Component {
     this.state = {
       title: '',
       description: '',
-      list: List.of(
-        Map({
-          id: 0,
-          title: 'Apprendre React',
-          description: 'Formation de 3 jours',
-          isDone: false,
-        }),
-        Map({
-          id: 1,
-          title: 'Ranger le bureau',
-          description: 'ne pas oublier les tiroirs',
-          idDone: false,
-        }),
-      ),
+      list: store.getState().todos.list,
     };
   }
 
-  onFormSubmit = () => {
-    const { title, description, list } = this.state;
-    this.setState({
-      title: '',
-      description: '',
-      list: list.push(
-        Map({
-          id: Date.now(),
-          title,
-          description,
-          isDone: false,
-        })
-      ),
+  componentDidMount() {
+    this.unsubscribeStore = store.subscribe(() => {
+      this.setState({
+        list: store.getState().todos.list,
+      });
     });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeStore();
   }
 
   onInputChange = (id, val) => {
@@ -50,19 +35,30 @@ class Todo extends Component {
     });
   }
 
+  onFormSubmit = () => {
+    const { title, description } = this.state;
+    store.dispatch({
+      type: TODO_ADD,
+      payload: {
+        id: Date.now(),
+        title,
+        description,
+        isDone: false,
+      },
+    });
+  }
+
   onUpdateItem = (updatedTodo) => {
-    this.setState({
-      list: this.state.list.map(todo => {
-        return todo.get('id') === updatedTodo.get('id')
-          ? updatedTodo.update('isDone', value => !value)
-          : todo;
-      }),
+    store.dispatch({
+      type: TODO_TOGGLE_ISDONE,
+      payload: updatedTodo,
     });
   }
 
   onRemoveItem = (removedTodo) => {
-    this.setState({
-      list: this.state.list.filter(todo => todo.get('id') !== removedTodo.get('id')),
+    store.dispatch({
+      type: TODO_REMOVE,
+      payload: removedTodo.get('id'),
     });
   }
 
