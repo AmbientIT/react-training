@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { TODO_ADD, TODO_REMOVE, TODO_TOGGLE_ISDONE } from '../../constants/todoCrud';
+import { addTodo, removeTodo, todoTogleIsDone } from '../../actions/todoCrud';
 import { store } from '../../store';
 import TodoForm from '../../components/todoForm/TodoForm';
 import TodoList from '../../components/todoList/TodoList';
@@ -36,34 +36,14 @@ class Todo extends Component {
   }
 
   onFormSubmit = () => {
-    const { title, description } = this.state;
-    store.dispatch({
-      type: TODO_ADD,
-      payload: {
-        id: Date.now(),
-        title,
-        description,
-        isDone: false,
-      },
-    });
-  }
-
-  onUpdateItem = (updatedTodo) => {
-    store.dispatch({
-      type: TODO_TOGGLE_ISDONE,
-      payload: updatedTodo,
-    });
-  }
-
-  onRemoveItem = (removedTodo) => {
-    store.dispatch({
-      type: TODO_REMOVE,
-      payload: removedTodo.get('id'),
+    addTodo({
+      title: this.state.title,
+      description: this.state.description,
     });
   }
 
   render() {
-    const { onRemoveItem, onUpdateItem, onInputChange, onFormSubmit } = this;
+    const { onInputChange, onFormSubmit } = this;
     const { title, description, list } = this.state;
 
     return (
@@ -76,8 +56,8 @@ class Todo extends Component {
         />
         <TodoList
           list={list}
-          removeItem={onRemoveItem}
-          updateItem={onUpdateItem}
+          removeItem={removeTodo}
+          updateItem={todoTogleIsDone}
         />
       </div>
     );
