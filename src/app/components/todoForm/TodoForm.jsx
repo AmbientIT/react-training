@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import Input from '../form/Input';
-import Label from '../form/Label';
-import Form from '../form/Form';
-import Button from '../button/Button';
+import { Input, Label, Form, Button } from '../_ui';
 
 const TodoForm = (props) => {
   const {

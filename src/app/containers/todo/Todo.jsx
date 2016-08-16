@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Map, List } from 'immutable';
 
-import TodoForm from '../components/todoForm/TodoForm';
-import TodoList from '../components/todoList/TodoList';
+import TodoForm from '../../components/todoForm/TodoForm';
+import TodoList from '../../components/todoList/TodoList';
 
 class Todo extends Component {
   constructor(props) {

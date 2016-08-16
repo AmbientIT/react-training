@@ -1,14 +1,17 @@
-import React from 'react';
-import config from './_config';
+import React, { PropTypes } from 'react';
+import Navbar from './components/navbar/Navbar';
 
-import Todo from './containers/Todo';
-
-export default () => {
+const App = ({ children }) => {
   return (
     <section>
-      <h1>{config.APP_TITLE}</h1>
-      <div>Webpack is doing its thing with React and ES2015</div>
-      <Todo />
+      <Navbar />
+      {children}
     </section>
   );
 };
+
+App.propTypes = {
+  children: PropTypes.node,
+};
+
+export default App;
