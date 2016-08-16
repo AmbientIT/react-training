@@ -10,6 +10,7 @@
     "no-console": 0,
     "no-param-reassign": 0,
     "import/prefer-default-export": 0,
-    'no-extra-boolean-cast': 0
+    'no-extra-boolean-cast': 0,
+    "new-cap": 0
   }
 }

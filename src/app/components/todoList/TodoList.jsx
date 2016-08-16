@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import TodoCard from '../todoCard/TodoCard';
 import Button from '../button/Button';
@@ -8,7 +9,7 @@ const TodoList = ({ list, removeItem, updateItem }) => {
     <div className="p2 border">
       {
         (() => {
-          if (list.length === 0) {
+          if (list.size === 0) {
             return (
               <div>No todos! Try creating one!</div>
             );
@@ -17,8 +18,10 @@ const TodoList = ({ list, removeItem, updateItem }) => {
           return list.map((todo, idx) => {
             return (
               <TodoCard key={idx}>
-                <h3 className={todo.isDone ? 'todo-done' : 'todo-undone'}>{todo.title}</h3>
-                <p>{todo.description}</p>
+                <h3 className={todo.get('isDone') ? 'todo-done' : 'todo-undone'}>
+                  {todo.get('title')}
+                </h3>
+                <p>{todo.get('description')}</p>
                 <p>
                   <Button
                     status="danger"
@@ -48,7 +51,14 @@ TodoList.propTypes = {
   /**
    * Tableau de todo à afficher
    */
-  list: PropTypes.array,
+  list: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.contains({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      isDone: PropTypes.bool,
+    })
+  ),
   /**
    * Les fonctions à appeler au clic sur les bouttons
    */

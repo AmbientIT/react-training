@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Map, List } from 'immutable';
 
 import TodoForm from '../components/todoForm/TodoForm';
 import TodoList from '../components/todoList/TodoList';
@@ -10,33 +11,36 @@ class Todo extends Component {
     this.state = {
       title: '',
       description: '',
-      list: [
-        {
+      list: List.of(
+        Map({
           id: 0,
           title: 'Apprendre React',
           description: 'Formation de 3 jours',
           isDone: false,
-        },
-        {
+        }),
+        Map({
           id: 1,
           title: 'Ranger le bureau',
           description: 'ne pas oublier les tiroirs',
           idDone: false,
-        },
-      ],
+        }),
+      ),
     };
   }
 
   onFormSubmit = () => {
-    const { list, title, description } = this.state;
+    const { title, description, list } = this.state;
     this.setState({
       title: '',
       description: '',
-      list: [...list, {
-        id: list[list.length - 1].id + 1,
-        title,
-        description,
-      }],
+      list: list.push(
+        Map({
+          id: Date.now(),
+          title,
+          description,
+          isDone: false,
+        })
+      ),
     });
   }
 
@@ -47,24 +51,24 @@ class Todo extends Component {
   }
 
   onUpdateItem = (updatedTodo) => {
-    updatedTodo.isDone = !updatedTodo.isDone;
     this.setState({
       list: this.state.list.map(todo => {
-        console.log(todo, updatedTodo);
-        return todo.id === updatedTodo.id ? updatedTodo : todo;
+        return todo.get('id') === updatedTodo.get('id')
+          ? updatedTodo.update('isDone', value => !value)
+          : todo;
       }),
     });
   }
 
   onRemoveItem = (removedTodo) => {
     this.setState({
-      list: this.state.list.filter(todo => todo.id !== removedTodo.id),
+      list: this.state.list.filter(todo => todo.get('id') !== removedTodo.get('id')),
     });
   }
 
   render() {
     const { onRemoveItem, onUpdateItem, onInputChange, onFormSubmit } = this;
-    const { list, title, description } = this.state;
+    const { title, description, list } = this.state;
 
     return (
       <div>
