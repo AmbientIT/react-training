@@ -2,6 +2,8 @@ import 'basscss/css/basscss.css';
 import React from 'react';
 import config from './_config';
 
+import './styles/main.css';
+
 const styles = {
   borderRadius: '50%',
 };
