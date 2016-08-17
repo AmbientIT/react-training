@@ -4,6 +4,8 @@ import config from './_config';
 import TodoCard from './components/todoCard/TodoCard';
 import Button from './components/button/Button';
 
+import './styles/main.css';
+
 export default () => {
   return (
     <section>
