@@ -1,3 +1,7 @@
 node_modules
 dist
 coverage
+npm-debug.log
+
+src/platform/server/node_modules
+src/platform/server/npm-debug.log

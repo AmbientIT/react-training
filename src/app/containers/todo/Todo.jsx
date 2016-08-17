@@ -48,6 +48,10 @@ class Todo extends Component {
       title: this.state.title,
       description: this.state.description,
     });
+    this.setState({
+      title: '',
+      description: '',
+    });
   }
 
   render() {

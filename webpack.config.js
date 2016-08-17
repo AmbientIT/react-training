@@ -4,9 +4,6 @@
 
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
 const ENV = require('yargs').argv.env || 'development';
 
 module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
@@ -55,18 +52,10 @@ module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([{
-      from: 'src/assets',
-      to: ''
-    }]),
-    new HtmlWebpackPlugin({
-      template: path.resolve(process.cwd(), 'src/index.html'),
-      inject: 'body'
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': `"${ENV}"`
       }
-    })
+    }),
   ]
 })
