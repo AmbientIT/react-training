@@ -1,8 +1,10 @@
-import 'basscss/css/basscss.css';
 import React from 'react';
 import config from './_config';
 
 import Todo from './containers/Todo';
+
+import './style/main.css';
+import './style/bass.css';
 
 export default () => {
   return (
