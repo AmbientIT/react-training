@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(todoActions, dispatc
 @connect(mapStateToProps, mapDispatchToProps)
 class Todo extends Component {
   static propTypes = {
+    findAll: PropTypes.func,
     addTodo: PropTypes.func,
     removeTodo: PropTypes.func,
     todoTogleIsDone: PropTypes.func,
@@ -35,6 +36,10 @@ class Todo extends Component {
       title: '',
       description: '',
     };
+  }
+
+  componentDidMount() {
+    this.props.findAll();
   }
 
   onInputChange = (id, val) => {

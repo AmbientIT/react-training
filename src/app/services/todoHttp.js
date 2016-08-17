@@ -1,7 +1,9 @@
 import HttpApi from './_httpApi';
 
-export default class TodoHttp extends HttpApi {
+class TodoHttp extends HttpApi {
   constructor() {
     super('todo');
   }
 }
+
+export default new TodoHttp();
