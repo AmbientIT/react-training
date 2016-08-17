@@ -1,4 +1,3 @@
-import 'basscss/css/basscss.css';
 import React from 'react';
 import config from './_config';
 import TodoCard from './components/todoCard/TodoCard';
