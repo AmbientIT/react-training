@@ -6,10 +6,11 @@ import rootReducer from '../reducers';
 const isDev = process.env.NODE_ENV === 'development';
 
 function getMiddleware() {
-  const middleware = isDev
-    ? [createLogger()]
-    : [];
-  return applyMiddleware(...middleware);
+  const middleware = [];
+
+  return isDev
+    ? applyMiddleware(...[...middleware, createLogger()])
+    : applyMiddleware(...middleware);
 }
 
 function getEnhancers() {
@@ -40,6 +41,6 @@ function configureStore(initialState = {}) {
   return store;
 }
 
-export default configureStore;
-
 export const store = configureStore();
+
+export default configureStore;
