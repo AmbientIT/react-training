@@ -4,6 +4,8 @@ import TodoCard from './components/todoCard/TodoCard';
 import Button from './components/button/Button';
 
 import './styles/main.css';
+import './styles/bass.css';
+
 
 export default () => {
   return (
