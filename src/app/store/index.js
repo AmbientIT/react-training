@@ -1,15 +1,17 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createLogger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 import rootReducer from '../reducers';
 
 const isDev = process.env.NODE_ENV === 'development';
 
 function getMiddleware() {
-  const middleware = isDev
-    ? [createLogger()]
-    : [];
-  return applyMiddleware(...middleware);
+  const middleware = [thunk];
+
+  return isDev
+    ? applyMiddleware(...[...middleware, createLogger()])
+    : applyMiddleware(...middleware);
 }
 
 function getEnhancers() {
