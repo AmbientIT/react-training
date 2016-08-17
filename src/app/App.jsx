@@ -1,7 +1,7 @@
-import 'basscss/css/basscss.css';
 import React from 'react';
 import config from './_config';
 
+import './styles/bass.css';
 import './styles/main.css';
 
 const styles = {
