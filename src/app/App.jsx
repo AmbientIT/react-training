@@ -3,8 +3,8 @@ import config from './_config';
 
 import Todo from './containers/Todo';
 
-import './style/main.css';
-import './style/bass.css';
+import './styles/main.css';
+import './styles/bass.css';
 
 export default () => {
   return (
