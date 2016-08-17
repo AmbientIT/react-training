@@ -1,11 +1,11 @@
-/* eslint-disable */
 const jwt = require('jwt-simple');
 const moment = require('moment');
+const path = require('path');
 
 const config = {
   tokenDurationInSecond: '10000000',
   TOKEN_SECRET: 'YOUR_UNIQUE_JWT_TOKEN_SECRET',
-  mockPath: './mockData/user.json',
+  mockPath: path.join(process.cwd(), 'src/platform/server/mockData/user.json'),
 };
 
 const ensureAuthenticated = (req, res, next) => {
@@ -30,7 +30,7 @@ const ensureAuthenticated = (req, res, next) => {
   }
   req.user = payload.user;
   return next();
-}
+};
 
 const generateToken = user => {
   const payload = {
@@ -39,7 +39,7 @@ const generateToken = user => {
     createdAt: moment().unix(),
   };
   return jwt.encode(payload, config.TOKEN_SECRET);
-}
+};
 
 const errorHandler = (res, err, status) => {
   console.error(err);
