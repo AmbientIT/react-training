@@ -3,6 +3,9 @@ import config from './_config';
 
 import Todo from './containers/Todo';
 
+import './styles/bass.css';
+import './styles/main.css';
+
 export default () => {
   return (
     <section>
