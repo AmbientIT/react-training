@@ -9,13 +9,13 @@ const apiHttp = axios.create({
 });
 
 const apiHttpInterceptor = httpConfig => {
-  console.log('request intercept', config);
+  // console.log('request intercept', httpConfig);
   // Do something before request is sent
   return httpConfig;
 };
 
 const apiHttpResponseInterceptor = response => {
-  console.log('http response ', response);
+  // console.log('http response ', response);
   return Promise.resolve(response.data);
 };
 
@@ -50,6 +50,6 @@ export default class HttpApi {
   }
 
   update(item) {
-    return this.http.put(`${this.uri}/${item.get('id')}`, item);
+    return this.http.put(`${this.uri}/${item.id || item.get('id')}`, item);
   }
 }

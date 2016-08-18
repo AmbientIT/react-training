@@ -11,6 +11,8 @@
     "no-param-reassign": 0,
     "import/prefer-default-export": 0,
     'no-extra-boolean-cast': 0,
-    "new-cap": 0
+    "new-cap": 0,
+    "max-len": ["error", 160],
+    "no-confusing-arrow": 0,
   }
 }

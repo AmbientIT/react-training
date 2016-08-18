@@ -1,48 +1,66 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
+import { Map } from 'immutable';
+import { reduxForm } from 'redux-form';
 
 import { Input, Label, Form, Button } from '../_ui';
 
-const TodoForm = (props) => {
-  const {
-    titleValue,
-    descriptionValue,
-    onSubmit,
-    onInputChange,
-  } = props;
+// ugly fix for redux-form and react will be fix soon see issues on their githu
+/* eslint no-unused-vars:0 */
+const domOnlyProps = ({
+  initialValue,
+  autofill,
+  onUpdate,
+  valid,
+  invalid,
+  dirty,
+  pristine,
+  active,
+  touched,
+  visited,
+  autofilled,
+  ...domProps }) => domProps;
 
-  return (
-    <Form onSubmit={onSubmit}>
-      <Label key="title">Title</Label>
-      <Input
-        id="title"
-        placeholder="Enter title..."
-        value={titleValue}
-        onChange={val => onInputChange('title', val)}
-      />
+@reduxForm(
+  {
+    form: 'todo',
+    fields: ['title', 'description'],
+  },
+  state => ({ initialValues: state.todos.selectedTodo.toObject() })
+)
+export default class TodoForm extends Component {
+  static propTypes = {
+    fields: PropTypes.object,
+    initialValues: PropTypes.object,
+    onSubmit: PropTypes.func,
+    submitting: PropTypes.bool,
+    handleSubmit: PropTypes.func,
+    values: PropTypes.object,
+    dispatch: PropTypes.func,
+  };
 
-      <Label key="description">Description</Label>
-      <Input
-        id="description"
-        placeholder="Enter description..."
-        value={descriptionValue}
-        onChange={(val) => onInputChange('description', val)}
-      />
-      <Button status="success" type="submit">Save</Button>
-    </Form>
-  );
-};
+  static defaultProps = {
+    onSubmit: () => {},
+  }
 
-TodoForm.propTypes = {
-  titleValue: PropTypes.string,
-  descriptionValue: PropTypes.string,
-  onInputChange: PropTypes.func,
-  onSubmit: PropTypes.func,
-};
-TodoForm.defaultProps = {
-  titleValue: '',
-  descriptionValue: '',
-  onInputChange: () => {},
-  onSubmit: () => {},
-};
+  render() {
+    const { fields: { title, description }, handleSubmit, submitting } = this.props;
+    return (
+      <Form onSubmit={handleSubmit}>
+        <Label key="title">Title</Label>
+        <Input
+          id="title"
+          placeholder="Enter title..."
+          reduxdata={domOnlyProps(title)}
+        />
 
-export default TodoForm;
+        <Label key="description">Description</Label>
+        <Input
+          id="description"
+          placeholder="Enter description..."
+          reduxdata={domOnlyProps(description)}
+        />
+        <Button status="success" type="submit" disabled={submitting}>Save</Button>
+      </Form>
+    );
+  }
+}

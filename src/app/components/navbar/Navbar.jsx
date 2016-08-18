@@ -15,7 +15,7 @@ const style = {
   },
 };
 
-export default () => {
+const Navbar = () => {
   return (
     <header style={style.header}>
       <span>
@@ -36,3 +36,5 @@ export default () => {
     </header>
   );
 };
+
+export default Navbar;

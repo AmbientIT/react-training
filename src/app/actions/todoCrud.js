@@ -1,4 +1,12 @@
-import { TODO_FINDALL, TODO_ADD, TODO_REMOVE, TODO_TOGGLE_ISDONE } from '../constants/todoCrud';
+import { reset } from 'redux-form';
+import {
+  TODO_FINDALL,
+  TODO_FINDONE,
+  TODO_ADD,
+  TODO_REMOVE,
+  TODO_UPDATE,
+  TODO_TOGGLE_ISDONE,
+} from '../constants/todoCrud';
 import todoHttp from '../services/todoHttp';
 
 export const findAll = params => dispatch => {
@@ -9,12 +17,19 @@ export const findAll = params => dispatch => {
     }));
 };
 
+export const findOne = (id, params = {}) => dispatch => {
+  return todoHttp.findOne(id, { params })
+    .then(todo => dispatch({
+      type: TODO_FINDONE,
+      payload: todo,
+    }));
+};
+
 export const addTodo = todo => dispatch => {
   return todoHttp.create(todo)
     .then(createdTodo => dispatch({
       type: TODO_ADD,
       payload: Object.assign(createdTodo, {
-        id: Date.now(),
         isDone: false,
       }),
     }));
@@ -28,10 +43,26 @@ export const removeTodo = todo => dispatch => {
     }));
 };
 
+export const updateTodo = todo => dispatch => {
+  return todoHttp.update(todo)
+    .then(updatedTodo => dispatch({
+      type: TODO_UPDATE,
+      payload: updatedTodo,
+    }));
+};
+
 export const todoTogleIsDone = todo => dispatch => {
   return todoHttp.update(todo.update('isDone', isDone => !isDone))
     .then(updatedTodo => dispatch({
       type: TODO_TOGGLE_ISDONE,
       payload: updatedTodo,
     }));
+};
+
+export const resetSelected = () => dispatch => {
+  dispatch(reset('todo'));
+  return dispatch({
+    type: TODO_FINDONE,
+    payload: { title: '', description: '' },
+  });
 };

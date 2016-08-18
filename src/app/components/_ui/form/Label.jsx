@@ -8,7 +8,6 @@ export const Label = ({ key, children }) => {
   );
 };
 
-Label.defaultName = 'Label';
 Label.propTypes = {
   children: PropTypes.node,
   key: PropTypes.string,
