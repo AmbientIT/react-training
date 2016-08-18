@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Map } from 'immutable';
 import { reduxForm } from 'redux-form';
 
-import { Input, Label, Form, Button } from '../_ui';
+import { Input, Label, Form, Button } from 'browser/components/_ui';
 
 // ugly fix for redux-form and react will be fix soon see issues on their githu
 /* eslint no-unused-vars:0 */

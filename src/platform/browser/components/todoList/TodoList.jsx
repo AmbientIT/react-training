@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import { Card, Button } from '../_ui';
+import { Card, Button } from 'browser/components/_ui';
 
 export default class TodoList extends Component {
   static propTypes = {

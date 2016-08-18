@@ -14,5 +14,7 @@
     "new-cap": 0,
     "max-len": ["error", 160],
     "no-confusing-arrow": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-unresolved": 0, 
   }
 }

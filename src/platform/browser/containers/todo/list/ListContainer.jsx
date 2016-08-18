@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import * as todoActions from '../../../actions/todoCrud';
-import TodoForm from '../../../components/todoForm/TodoForm';
-import TodoList from '../../../components/todoList/TodoList';
+import * as todoActions from 'common/actions/todoCrud';
+import TodoForm from 'browser/components/todoForm/TodoForm';
+import TodoList from 'browser/components/todoList/TodoList';
 
 @connect(
   ({ todos }) => ({ list: todos.list }),

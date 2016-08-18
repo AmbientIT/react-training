@@ -1,13 +1,15 @@
-/*eslint-disable*/
-
-'use strict';
-
+const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const ENV = require('yargs').argv.env || 'development';
 
 module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
   resolve: {
+    alias: {
+      common: path.join(__dirname, 'src/platform/common'),
+      server: path.join(__dirname, 'src/platform/server'),
+      browser: path.join(__dirname, 'src/platform/browser'),
+    },
     extensions: ['', '.jsx', '.js', '.json'],
     modulesDirectories: ['node_modules']
   },
@@ -39,7 +41,7 @@ module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
       },
       {
         test: /\.(gif|png|jpe?g)$/i,
-        loader: 'file?name=dist/images/[name].[ext]'
+        loader: 'file?name=dist/img/[name].[ext]'
       },
       {
         test: /\.woff2?$/,

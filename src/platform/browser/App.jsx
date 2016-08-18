@@ -2,8 +2,8 @@ import React from 'react';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
+import configureStore from 'common/store';
 import { createRoutes } from './appRoutes';
-import configureStore from './store';
 
 import './styles/bass.css';
 import './styles/main.css';

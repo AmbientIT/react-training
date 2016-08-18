@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import { Button } from '../_ui';
-import config from '../../_config';
+import { Button } from 'browser/components/_ui';
+import config from 'common/config';
 
 const style = {
   header: {

@@ -6,8 +6,8 @@ import {
   TODO_REMOVE,
   TODO_UPDATE,
   TODO_TOGGLE_ISDONE,
-} from '../constants/todoCrud';
-import todoHttp from '../services/todoHttp';
+} from 'common/constants/todoCrud';
+import todoHttp from 'common/services/todoHttp';
 
 export const findAll = params => dispatch => {
   return todoHttp.findAll({ params })

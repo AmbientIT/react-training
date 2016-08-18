@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { updateTodo, findOne, resetSelected } from '../../../actions/todoCrud';
-import TodoForm from '../../../components/todoForm/TodoForm';
+import { updateTodo, findOne, resetSelected } from 'common/actions/todoCrud';
+import TodoForm from 'browser/components/todoForm/TodoForm';
 
 @connect(
   ({ todos: { selectedTodo } }) => ({ selectedTodo: selectedTodo.toObject() }),
