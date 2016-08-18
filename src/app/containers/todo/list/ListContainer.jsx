@@ -33,7 +33,6 @@ export default class TodoListContainer extends Component {
   }
 
   onFormSubmit = data => {
-    console.log(this);
     this.props.addTodo(Object.assign({ isDone: false }, data))
       .then(() => this.props.resetSelected());
   }

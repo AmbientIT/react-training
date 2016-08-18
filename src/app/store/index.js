@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 
@@ -6,8 +7,8 @@ import rootReducer from '../reducers';
 
 const isDev = process.env.NODE_ENV === 'development';
 
-function getMiddleware() {
-  const middleware = [thunk];
+function getMiddleware(history) {
+  const middleware = [thunk, routerMiddleware(history)];
 
   return isDev
     ? applyMiddleware(...[...middleware, createLogger()])
@@ -32,9 +33,9 @@ function enableHotLoader(store) {
   }
 }
 
-function configureStore(initialState = {}) {
+function configureStore(initialState = {}, history) {
   const store = compose(
-    getMiddleware(),
+    getMiddleware(history),
     ...getEnhancers()
   )(createStore)(rootReducer, initialState);
 
