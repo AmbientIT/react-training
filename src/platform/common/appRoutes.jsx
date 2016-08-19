@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import Layout from './containers/Layout';
-import Home from './containers/home/Home';
-import TodoContainer from './containers/todo/TodoContainer';
-import TodoListContainer from './containers/todo/list/ListContainer';
-import TodoEditContainer from './containers/todo/edit/EditContainer';
+import Layout from '../browser/containers/Layout';
+import Home from '../browser/containers/home/Home';
+import TodoContainer from '../browser/containers/todo/TodoContainer';
+import TodoListContainer from '../browser/containers/todo/list/ListContainer';
+import TodoEditContainer from '../browser/containers/todo/edit/EditContainer';
 
 /* eslint no-unused-vars:0 */
 const createRoutes = (store) => {

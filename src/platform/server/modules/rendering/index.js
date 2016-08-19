@@ -1,4 +1,3 @@
-/* eslint prefer-template:0 */
 /* eslint react/jsx-filename-extension:0 */
 /* eslint import/no-extraneous-dependencies:0 */
 import React from 'react';
@@ -11,7 +10,7 @@ import { AppContainer } from 'react-hot-loader';
 
 import configureStore from '../../../common/store';
 import { findAll, findOne, resetSelected } from '../../../common/actions/todoCrud';
-import createRoutes from '../../../browser/appRoutes';
+import createRoutes from '../../../common/appRoutes';
 
 
 const renderReactApp = (req, res) => {
