@@ -1,4 +1,7 @@
-require('babel-register')
+require('babel-register')({
+  presets: ['es2015-native-modules', 'stage-0', 'react'],
+  plugins: ['transform-decorators-legacy'],
+});
 
 const path = require('path');
 const fs = require('fs');
@@ -43,7 +46,7 @@ function setMockRouter(server, mocks) {
 const server = jsonServer.create();
 server.set('view engine', 'ejs');
 server.use(morgan('dev', { skip: req => req.path.match(/^\/__what/) }));
-server.use('/public', express.static('public'));
+server.use('/', express.static('public'));
 server.use(bodyParser.json());
 server.use(webpackDevInstance);
 server.use(webpackHotInstance);

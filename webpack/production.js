@@ -39,7 +39,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([{
       from: 'src/assets',
-      to: 'public',
+      to: '',
     }]),
   ]
 }

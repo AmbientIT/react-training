@@ -28,6 +28,6 @@ CardImage.propTypes = {
   size: PropTypes.number,
 };
 CardImage.defaultProps = {
-  src: './public/img/placeholder.svg',
+  src: './img/placeholder.svg',
   size: 96,
 };

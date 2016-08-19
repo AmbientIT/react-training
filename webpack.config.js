@@ -1,6 +1,10 @@
+/* eslint-disable */
+
 const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const ENV = require('yargs').argv.env || 'development';
 
 module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
@@ -37,7 +41,7 @@ module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        loaders: ['isomorphic-style-loader', 'style-loader', 'css-loader'],
       },
       {
         test: /\.(gif|png|jpe?g)$/i,
@@ -57,7 +61,12 @@ module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: `"${ENV}"`,
+        CLIENT: true,
       },
     }),
+    new CopyWebpackPlugin([{
+      from: 'src/platform/browser/styles',
+      to: 'css',
+    }]),
   ],
 });

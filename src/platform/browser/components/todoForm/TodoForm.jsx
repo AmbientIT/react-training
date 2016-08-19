@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import { Map } from 'immutable';
 import { reduxForm } from 'redux-form';
 
-import { Input, Label, Form, Button } from 'browser/components/_ui';
+import { Input, Label, Form, Button } from '../_ui';
 
 // ugly fix for redux-form and react will be fix soon see issues on their githu
 /* eslint no-unused-vars:0 */
@@ -12,6 +11,7 @@ const domOnlyProps = ({
   onUpdate,
   valid,
   invalid,
+  error,
   dirty,
   pristine,
   active,
@@ -41,7 +41,7 @@ const validate = values => {
     fields: ['title', 'description'],
     validate,
   },
-  state => ({ initialValues: state.todos.selectedTodo.toObject() }),
+  state => ({ initialValues: state.todos.selectedTodo }),
 )
 export default class TodoForm extends Component {
   static propTypes = {
@@ -60,6 +60,7 @@ export default class TodoForm extends Component {
 
   render() {
     const { fields: { title, description }, handleSubmit, submitting } = this.props;
+
     return (
       <Form onSubmit={handleSubmit}>
         <Label key="title">Title</Label>

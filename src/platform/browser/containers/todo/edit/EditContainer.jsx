@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { updateTodo, findOne, resetSelected } from 'common/actions/todoCrud';
-import TodoForm from 'browser/components/todoForm/TodoForm';
+import { updateTodo, findOne, resetSelected } from '../../../../common/actions/todoCrud';
+import TodoForm from '../../../components/todoForm/TodoForm';
 
 @connect(
-  ({ todos: { selectedTodo } }) => ({ selectedTodo: selectedTodo.toObject() }),
+  ({ todos: { selectedTodo } }) => ({ selectedTodo }),
   dispatch => bindActionCreators({ updateTodo, findOne, resetSelected }, dispatch)
 )
 export default class TodoEditContainer extends Component {
@@ -24,7 +24,6 @@ export default class TodoEditContainer extends Component {
 
   componentDidMount() {
     this.props.findOne(this.props.params.id);
-    console.log(this.props);
   }
 
   componentWillUnmount() {

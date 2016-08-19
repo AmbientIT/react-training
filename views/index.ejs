@@ -3,13 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/bass.css" />
+  <link rel="stylesheet" href="/css/main.css" />
   <base href="/" />
   <title>React training</title>
 </head>
 <body>
-  <main id="app-container">
-
-  </main>
-  <script src="public/bundle.js"></script>
+  <main id="app-container"><%- app %></main>
+  <script>
+    try {
+      window.REDUX_STATE = <%- JSON.stringify(reduxData) %>;
+    } catch (e) {
+      console.warn('error in getting server redux data');
+    }
+  </script>
+  <script src="bundle.js"></script>
 </body>
 </html>

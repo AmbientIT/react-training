@@ -1,4 +1,3 @@
-import { Map, List } from 'immutable';
 import {
   TODO_FINDALL,
   TODO_FINDONE,
@@ -9,27 +8,28 @@ import {
 } from '../constants/todoCrud';
 
 const initialState = {
-  selectedTodo: Map({ title: '', description: '' }),
-  list: List.of(),
+  selectedTodo: { title: '', description: '' },
+  list: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case TODO_FINDALL:
-      state.list = List.of(...action.payload.map(todo => Map(todo)));
+      state.list = action.payload;
+      state.selectedTodo = initialState.selectedTodo;
       break;
     case TODO_FINDONE:
-      state.selectedTodo = Map(action.payload);
+      state.selectedTodo = action.payload;
       break;
     case TODO_ADD:
-      state.list = state.list.push(Map(action.payload));
+      state.list = [...state.list, action.payload];
       break;
     case TODO_REMOVE:
-      state.list = state.list.filter(todo => todo.get('id') !== action.payload);
+      state.list = state.list.filter(todo => todo.id !== action.payload);
       break;
     case TODO_UPDATE:
     case TODO_TOGGLE_ISDONE:
-      state.list = state.list.map(todo => todo.get('id') === action.payload.id ? Map(action.payload) : todo);
+      state.list = state.list.map(todo => todo.id === action.payload.id ? action.payload : todo);
       break;
     default:
       return state;

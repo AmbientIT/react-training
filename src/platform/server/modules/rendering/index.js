@@ -1,62 +1,64 @@
-// const renderReactApp = () => {
-//   const store = finalCreateStore(combinedReducers);
-//
-// 	// react-router
-// 	match( {routes, location: req.url}, ( error, redirectLocation, renderProps ) => {
-//
-// 		if ( error )
-// 			return res.status(500).send( error.message );
-//
-// 		if ( redirectLocation )
-// 			return res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
-//
-// 		if ( renderProps == null ) {
-// 			// return next('err msg: route not found'); // yield control to next middleware to handle the request
-// 			return res.status(404).send( 'Not found' );
-// 		}
-//
-// 		// console.log( '\nserver > renderProps: \n', require('util').inspect( renderProps, false, 1, true) )
-// 		// console.log( '\nserver > renderProps: \n', require('util').inspect( renderProps.components, false, 3, true) )
-//
-// 		// this is where universal rendering happens,
-// 		// fetchComponentData() will trigger actions listed in static "needs" props in each container component
-// 		// and wait for all of them to complete before continuing rendering the page,
-// 		// hence ensuring all data needed was fetched before proceeding
-// 		//
-// 		// renderProps: contains all necessary data, e.g: routes, router, history, components...
-// 		fetchComponentData( store.dispatch, renderProps.components, renderProps.params)
-//
-// 		.then( () => {
-//
-// 			const initView = renderToString((
-// 				<Provider store={store}>
-// 				  <RouterContext {...renderProps} />
-// 				</Provider>
-// 			))
-//
-// 			// console.log('\ninitView:\n', initView);
-//
-// 			let state = JSON.stringify( store.getState() );
-// 			// console.log( '\nstate: ', state )
-//
-// 			let page = renderFullPage( initView, state )
-// 			// console.log( '\npage:\n', page );
-//
-// 			return page;
-//
-// 		})
-//
-// 		.then( page => res.status(200).send(page) )
-//
-// 		.catch( err => res.end(err.message) );
-// 	})
-// }
+/* eslint prefer-template:0 */
+/* eslint react/jsx-filename-extension:0 */
+/* eslint import/no-extraneous-dependencies:0 */
+import React from 'react';
+import { match, RouterContext } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { Provider } from 'react-redux';
+import { renderToString } from 'react-dom/server';
+import createHistory from 'react-router/lib/createMemoryHistory';
+import { AppContainer } from 'react-hot-loader';
+
+import configureStore from '../../../common/store';
+import { findAll, findOne, resetSelected } from '../../../common/actions/todoCrud';
+import createRoutes from '../../../browser/appRoutes';
+
+
+const renderReactApp = (req, res) => {
+  const memoryHistory = createHistory(req.originalUrl);
+  const store = configureStore({}, memoryHistory);
+  const history = syncHistoryWithStore(memoryHistory, store);
+
+  match({ history, routes: createRoutes(store), location: req.originalUrl, basename: '/' }, (error, redirectLocation, renderProps) => {
+    if (redirectLocation) {
+      res.redirect(redirectLocation.pathname + redirectLocation.search);
+    } else if (error) {
+      console.error('ROUTER ERROR:', error);
+      res.status(500);
+    } else if (renderProps) {
+      let promise = Promise.resolve();
+      if (req.path === '/todo') {
+        promise = findAll()(store.dispatch);
+        resetSelected()(store.dispatch);
+      } else if (req.path.indexOf('edit') !== -1) {
+        promise = findOne(req.path.split('/')[2])(store.dispatch);
+      }
+      promise.then(() => {
+        res.status(200);
+        global.navigator = { userAgent: req.headers['user-agent'] };
+        res.render('index', {
+          title: 'My Todo list',
+          reduxData: store.getState(),
+          app: renderToString(
+            <AppContainer>
+              <Provider store={store}>
+                <RouterContext {...renderProps} />
+              </Provider>
+            </AppContainer>
+          ),
+        });
+      });
+    } else {
+      res.status(404).send('Not found');
+    }
+  });
+};
 
 
 module.exports = server => {
   server.get('*', (req, res, next) => {
     return req.path.match(/^\/api/)
       || req.path.match(/^\/public/)
-      || req.path.match(/^\/__what/) ? next() : res.render('index');
+      || req.path.match(/^\/__what/) ? next() : renderReactApp(req, res);
   });
 };

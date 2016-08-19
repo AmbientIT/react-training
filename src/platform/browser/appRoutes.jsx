@@ -8,7 +8,7 @@ import TodoListContainer from './containers/todo/list/ListContainer';
 import TodoEditContainer from './containers/todo/edit/EditContainer';
 
 /* eslint no-unused-vars:0 */
-export const createRoutes = (store) => {
+const createRoutes = (store) => {
   return (
     <Route path="/" component={Layout}>
       <IndexRoute	component={Home}	/>
@@ -19,3 +19,5 @@ export const createRoutes = (store) => {
     </Route>
   );
 };
+
+export default createRoutes;

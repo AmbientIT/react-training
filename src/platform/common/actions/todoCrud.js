@@ -6,8 +6,8 @@ import {
   TODO_REMOVE,
   TODO_UPDATE,
   TODO_TOGGLE_ISDONE,
-} from 'common/constants/todoCrud';
-import todoHttp from 'common/services/todoHttp';
+} from '../constants/todoCrud';
+import todoHttp from '../services/todoHttp';
 
 export const findAll = params => dispatch => {
   return todoHttp.findAll({ params })
@@ -36,10 +36,10 @@ export const addTodo = todo => dispatch => {
 };
 
 export const removeTodo = todo => dispatch => {
-  return todoHttp.destroy(todo.get('id'))
+  return todoHttp.destroy(todo.id)
     .then(() => dispatch({
       type: TODO_REMOVE,
-      payload: todo.get('id'),
+      payload: todo.id,
     }));
 };
 
@@ -52,7 +52,7 @@ export const updateTodo = todo => dispatch => {
 };
 
 export const todoTogleIsDone = todo => dispatch => {
-  return todoHttp.update(todo.update('isDone', isDone => !isDone))
+  return todoHttp.update(Object.assign(todo, { isDone: !todo.isDone }))
     .then(updatedTodo => dispatch({
       type: TODO_TOGGLE_ISDONE,
       payload: updatedTodo,

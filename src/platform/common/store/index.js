@@ -3,7 +3,7 @@ import { routerMiddleware } from 'react-router-redux';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import rootReducer from 'common/reducers';
+import rootReducer from '..//reducers';
 
 const isDev = process.env.NODE_ENV === 'development';
 

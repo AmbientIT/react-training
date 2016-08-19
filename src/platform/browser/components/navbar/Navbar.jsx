@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import { Button } from 'browser/components/_ui';
-import config from 'common/config';
+import { Button } from '../_ui';
+import config from '../../../common/config';
 
 const style = {
   header: {
@@ -22,12 +22,12 @@ const Navbar = () => {
         {config.APP_TITLE}
       </span>
       <nav style={style.nav}>
-        <Link to="">
+        <Link to="/">
           <Button>
             Home
           </Button>
         </Link>
-        <Link to="todo" activeClassName="active-link">
+        <Link to="/todo" activeClassName="active-link">
           <Button>
             Todo
           </Button>
