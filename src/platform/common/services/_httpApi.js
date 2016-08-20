@@ -50,6 +50,6 @@ export default class HttpApi {
   }
 
   update(item) {
-    return this.http.put(`${this.uri}/${item.id || item.get('id')}`, item);
+    return this.http.put(`${this.uri}/${item.id}`, item);
   }
 }

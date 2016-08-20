@@ -3,13 +3,15 @@ import { routerMiddleware } from 'react-router-redux';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import rootReducer from '..//reducers';
+import rootReducer from '../reducers';
 
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development' && process.env.BROWSER;
 
 function getMiddleware(history) {
-  const middleware = [thunk, routerMiddleware(history)];
-
+  const middleware = [thunk];
+  if (process.env.BROWSER) {
+    middleware.push(routerMiddleware(history));
+  }
   return isDev
     ? applyMiddleware(...[...middleware, createLogger()])
     : applyMiddleware(...middleware);

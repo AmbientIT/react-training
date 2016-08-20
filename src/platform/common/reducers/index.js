@@ -4,8 +4,13 @@ import { routerReducer as routing } from 'react-router-redux';
 
 import todos from './todos';
 
-export default combineReducers({
+const reducers = {
   todos,
   form,
-  routing,
-});
+};
+
+if (process.env.BROWSER) {
+  reducers.routing = routing;
+}
+
+export default combineReducers(reducers);

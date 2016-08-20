@@ -1,5 +1,3 @@
-/* eslint-disabl */
-
 import React, { Component, PropTypes } from 'react';
 import {
   Text,
@@ -16,7 +14,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as todoActions from '../../../common/actions/todoCrud';
-
+import TodoForm from '../../components/todoForm/TodoForm';
 
 const styles = StyleSheet.create({
   row: {
@@ -32,6 +30,10 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
   },
+  scrollView: {
+    backgroundColor: '#6A85B1',
+    height: 300,
+  },
 });
 
 
@@ -40,6 +42,8 @@ class ListScreen extends Component {
     findAll: PropTypes.func,
     list: PropTypes.array,
     todoTogleIsDone: PropTypes.func,
+    findOne: PropTypes.func,
+    updateTodo: PropTypes.func,
   }
   constructor(props) {
     super(props);
@@ -65,21 +69,27 @@ class ListScreen extends Component {
   }
 
   onPressRow = (selectedTodo) => {
-    this.setState({ modalVisible: true, selectedTodo });
+    this.props.findOne(selectedTodo.id).then(() => this.setState({ modalVisible: true, selectedTodo }));
   }
 
   renderRow = (rowData) => {
+    const getTextStyle = () => {
+      return StyleSheet({
+        flex: 1,
+        textDecoration: rowData.isDone ? 'line-through' : 'none',
+      });
+    };
     return (
-      <ScrollView style={styles.rowStyle}>
+      <View style={styles.row}>
         <TouchableOpacity onPress={() => this.onPressRow(rowData)}>
-          <Text style={styles.rowText}>{rowData.title}</Text>
+          <Text style={getTextStyle()}>{rowData.title}</Text>
         </TouchableOpacity>
         <Switch
           onValueChange={() => this.props.todoTogleIsDone(rowData)}
           style={{ marginBottom: 10 }}
           value={rowData.isDone}
         />
-      </ScrollView>
+      </View>
     );
   }
 
@@ -101,28 +111,35 @@ class ListScreen extends Component {
   renderListView() {
     return (
       <View style={styles.container}>
-        <ListView
-          dataSource={this.state.dataSource}
-          style={styles.listview}
-          renderRow={this.renderRow}
-        />
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          onScroll={() => { console.log('onScroll!'); }}
+          scrollEventThrottle={200}
+          style={styles.scrollView}
+        >
+          <ListView
+            dataSource={this.state.dataSource}
+            style={styles.listview}
+            renderRow={this.renderRow}
+          />
+        </ScrollView>
         <Modal
           animationType={"slide"}
           transparent={false}
           visible={this.state.modalVisible}
         >
           <View style={{ marginTop: 22 }}>
-             <View>
-           <Text>Hello World!</Text>
-
-           <TouchableHighlight onPress={() => {
-             this.setState({ modalVisible: false })
-           }}>
-             <Text>Hide Modal</Text>
-           </TouchableHighlight>
-
-         </View>
-        </View>
+            <View>
+              <TouchableHighlight
+                onPress={() => {
+                  this.setState({ modalVisible: false });
+                }}
+              >
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+              <TodoForm onSubmit={this.props.updateTodo} />
+            </View>
+          </View>
         </Modal>
       </View>
     );

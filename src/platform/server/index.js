@@ -1,3 +1,4 @@
+process.env.BROWSER = true;
 require('babel-register')({
   presets: ['es2015-native-modules', 'stage-0', 'react'],
   plugins: ['transform-decorators-legacy'],

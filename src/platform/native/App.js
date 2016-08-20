@@ -1,14 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
-import thunk from 'redux-thunk';
-import todos from '../common/reducers/todos';
-import { registerScreens } from './screens';
+import configureStore from '../common/store';
+import registerScreens from './screens';
 
-// // redux related book keeping
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const reducer = combineReducers({ todos });
-const store = createStoreWithMiddleware(reducer);
+const store = configureStore();
 
 // screen related book keeping
 registerScreens(store, Provider);
