@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+    android:shareInterpolator="true">
+    <translate
+        android:fromYDelta="100%"
+        android:toYDelta="0"
+        android:duration="250"/>
+</set>
+<!-- From: file:/home/charl/Workspace/JsProjects/react-training/node_modules/react-native-navigation/android/app/src/main/res/anim/slide_up.xml --><!-- From: file:/home/charl/Workspace/JsProjects/react-training/android/app/build/intermediates/exploded-aar/example/react-native-navigation/unspecified/libraryDebug/res/anim/slide_up.xml -->

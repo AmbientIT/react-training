@@ -6,6 +6,9 @@
     "prebuild": "rimraf dist",
     "build": "webpack --progress --hide-modules --env production",
     "start": "node src/platform/server",
+    "build-android": "(cd android/ && ./gradlew assembleDebug)",
+    "start-native": "node node_modules/react-native/local-cli/cli.js start",
+    "bundle-android": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.map --assets-dest android/app/src/main/res/",
     "tdd": "karma start",
     "test": "karma start --single-run --browsers PhantomJS"
   },
@@ -18,6 +21,8 @@
     "react-dom": "^15.3.0",
     "react-hot-loader": "^3.0.0-beta.2",
     "react-immutable-proptypes": "^2.1.0",
+    "react-native": "^0.31.0",
+    "react-native-navigation": "^1.0.30",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
     "react-router-redux": "^4.0.5",

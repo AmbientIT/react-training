@@ -1,11 +1,11 @@
 import axios from 'axios';
-import config from '..//config';
+import config from '../config';
 
 const apiHttp = axios.create({
   baseURL: config.APIURL,
-  headers: {
-    'Content-type': 'application/json',
-  },
+  // headers: {
+  //   'Content-type': 'application/json',
+  // },
 });
 
 const apiHttpInterceptor = httpConfig => {
@@ -33,7 +33,7 @@ export default class HttpApi {
     this.http = apiHttp;
   }
 
-  findAll(params) {
+  findAll(params = {}) {
     return this.http.get(this.uri, { params });
   }
 

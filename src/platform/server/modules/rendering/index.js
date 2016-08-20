@@ -10,7 +10,7 @@ import { AppContainer } from 'react-hot-loader';
 
 import configureStore from '../../../common/store';
 import { findAll, findOne, resetSelected } from '../../../common/actions/todoCrud';
-import createRoutes from '../../../common/appRoutes';
+import createRoutes from '../../../browser/appRoutes';
 
 
 const renderReactApp = (req, res) => {

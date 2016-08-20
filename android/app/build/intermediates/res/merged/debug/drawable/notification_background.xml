@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorBottomNavigationNotification" />
+    <corners android:radius="@dimen/bottom_navigation_notification_radius" />
+</shape><!-- From: file:/home/charl/Workspace/JsProjects/react-training/android/app/build/intermediates/exploded-aar/com.aurelhubert/ahbottomnavigation/1.2.3/res/drawable/notification_background.xml -->

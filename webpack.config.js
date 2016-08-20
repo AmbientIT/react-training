@@ -61,7 +61,7 @@ module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: `"${ENV}"`,
-        CLIENT: true,
+        BROWSER: true,
       },
     }),
     new CopyWebpackPlugin([{

@@ -1,5 +1,5 @@
-import devConfig from './env/development.json';
-import prodConfig from './env/production.json';
+import devConfig from './env/development';
+import prodConfig from './env/production';
 
 export default Object.assign({
   APP_TITLE: 'ReactStarter',

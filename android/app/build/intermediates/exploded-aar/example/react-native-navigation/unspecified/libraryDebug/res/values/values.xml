@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/charl/Workspace/JsProjects/react-training/node_modules/react-native-navigation/android/app/src/main/res/values/ids.xml -->
+    <eat-comment/>
+    <item name="react_root_view" type="id"/>
+    <!-- From: file:/home/charl/Workspace/JsProjects/react-training/node_modules/react-native-navigation/android/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="drawer_close">Drawer Close</string>
+    <string name="drawer_open">Drawer Open</string>
+    <!-- From: file:/home/charl/Workspace/JsProjects/react-training/node_modules/react-native-navigation/android/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="Modal" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/modalAnimations</item>
+    </style>
+    <style name="modalAnimations">
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+</resources>
