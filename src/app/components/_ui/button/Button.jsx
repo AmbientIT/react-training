@@ -7,7 +7,7 @@ const buttonStatus = {
   danger: 'bg-red',
 };
 
-const Button = ({ type, onClick, status, children }) => {
+export const Button = ({ type, onClick, status, children }) => {
   return (
     <button
       type={type}
@@ -42,5 +42,3 @@ Button.defaultProps = {
   onClick: () => {},
   status: 'primary',
 };
-
-export default Button;

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Label = ({ key, children }) => {
+export const Label = ({ key, children }) => {
   return (
     <label className="bold mb1" htmlFor={key}>
       { children }
@@ -16,5 +16,3 @@ Label.propTypes = {
 Label.defaultProps = {
   key: '',
 };
-
-export default Label;

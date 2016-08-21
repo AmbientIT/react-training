@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import TodoCard from '../todoCard/TodoCard';
-import Button from '../button/Button';
+import { Card, Button } from '../_ui';
 
 const TodoList = ({ list, removeItem, updateItem }) => {
   return (
@@ -16,7 +15,7 @@ const TodoList = ({ list, removeItem, updateItem }) => {
 
           return list.map((todo, idx) => {
             return (
-              <TodoCard key={idx}>
+              <Card key={idx}>
                 <h3 className={todo.isDone ? 'todo-done' : 'todo-undone'}>{todo.title}</h3>
                 <p>{todo.description}</p>
                 <p>
@@ -35,7 +34,7 @@ const TodoList = ({ list, removeItem, updateItem }) => {
                     Done
                   </Button>
                 </p>
-              </TodoCard>
+              </Card>
             );
           });
         })()

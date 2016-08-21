@@ -8,8 +8,6 @@ class Todo extends Component {
     super(props);
 
     this.state = {
-      title: '',
-      description: '',
       list: [
         {
           id: 0,
@@ -27,22 +25,13 @@ class Todo extends Component {
     };
   }
 
-  onFormSubmit = () => {
-    const { list, title, description } = this.state;
+  onFormSubmit = (createdTodo) => {
+    console.log(createdTodo);
+    const { list } = this.state;
     this.setState({
-      title: '',
-      description: '',
-      list: [...list, {
+      list: [...list, Object.assign({
         id: list[list.length - 1].id + 1,
-        title,
-        description,
-      }],
-    });
-  }
-
-  onInputChange = (id, val) => {
-    this.setState({
-      [id]: val,
+      }, createdTodo)],
     });
   }
 
@@ -63,15 +52,12 @@ class Todo extends Component {
   }
 
   render() {
-    const { onRemoveItem, onUpdateItem, onInputChange, onFormSubmit } = this;
-    const { list, title, description } = this.state;
+    const { onRemoveItem, onUpdateItem, onFormSubmit } = this;
+    const { list } = this.state;
 
     return (
       <div>
         <TodoForm
-          titleValue={title}
-          descriptionValue={description}
-          onInputChange={onInputChange}
           onSubmit={onFormSubmit}
         />
         <TodoList

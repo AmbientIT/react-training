@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 
-import TodoImage from '../todoImage/TodoImage';
+import CardImage from './cardImage/CardImage';
 
-const TodoCard = ({ image, children }) => {
+export const Card = ({ image, children }) => {
   return (
     <div className="flex mb2 border flex-center">
-      <TodoImage src={image} size={64} />
+      <CardImage src={image} size={64} />
 
       <div className="flex-auto">
         { children }
@@ -14,8 +14,7 @@ const TodoCard = ({ image, children }) => {
   );
 };
 
-TodoCard.defaultName = 'ProfileCard';
-TodoCard.propTypes = {
+Card.propTypes = {
   /**
    * L'enfant de ce component
    */
@@ -25,5 +24,3 @@ TodoCard.propTypes = {
    */
   image: PropTypes.string,
 };
-
-export default TodoCard;

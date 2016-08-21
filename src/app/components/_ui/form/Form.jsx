@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Form = ({ onSubmit, children }) => {
+export const Form = ({ onSubmit, children }) => {
   return (
     <form
       className="p2 mb2 border"
@@ -24,5 +24,3 @@ Form.propTypes = {
 Form.defaultProps = {
   onSubmit: () => {},
 };
-
-export default Form;
