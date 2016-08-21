@@ -1,5 +1,5 @@
 import React from 'react';
-import	{	Router,	Route,	browserHistory,	IndexRoute	}	from	'react-router';
+import { Router,	Route, browserHistory, IndexRoute } from 'react-router';
 import App from './App';
 import Home from './containers/home/Home';
 import Todo from './containers/todo/Todo';
