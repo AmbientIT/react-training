@@ -3,7 +3,7 @@ import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import configureStore from '../common/store';
-import createRoutes from '../common/appRoutes';
+import createRoutes from './appRoutes';
 
 if (process.env.NODE_ENV === 'development') {
   require('./styles/bass.css');
