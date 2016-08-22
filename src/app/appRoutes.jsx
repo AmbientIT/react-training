@@ -5,12 +5,16 @@ import Home from './containers/home/Home';
 import Todo from './containers/todo/Todo';
 
 export const appRoutes = (
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute	component={Home}	/>
-      <Route path="/todo" component={Todo} />
-    </Route>
-  </Router>
+  <Route path="/" component={App}>
+    <IndexRoute	component={Home}	/>
+    <Route path="/todo" component={Todo} />
+  </Route>
 );
 
-export default () => appRoutes;
+export default () => {
+  return (
+    <Router history={browserHistory}>
+      {appRoutes}
+    </Router>
+  );
+};
