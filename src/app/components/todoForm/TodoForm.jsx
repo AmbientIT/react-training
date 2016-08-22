@@ -10,6 +10,14 @@ class TodoForm extends Component {
     onSubmit: () => {},
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      description: '',
+    };
+  }
+
   onInputChange = (id, val) => {
     this.setState({
       [id]: val,
@@ -24,6 +32,7 @@ class TodoForm extends Component {
         <Input
           id="title"
           placeholder="Enter title..."
+          value={this.state.title}
           onChange={val => this.onInputChange('title', val)}
         />
 
@@ -31,6 +40,7 @@ class TodoForm extends Component {
         <Input
           id="description"
           placeholder="Enter description..."
+          value={this.state.description}
           onChange={(val) => this.onInputChange('description', val)}
         />
         <Button status="success" type="submit">Save</Button>
