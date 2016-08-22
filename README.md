@@ -8,7 +8,8 @@ npm i axios -S
 ```
 
 ### Instructions
-Dans le repertoire src/app/services creer un fichier todoHttpApi qui expose plusieurs methode:
+url de la ressource : http://localhost:3000/api/todo
+Dans le repertoire src/app/services creer un fichier todoHttpApi qui expose plusieurs methodes utilisant axios:
  - findAll(params: object)
  - findOne(id: number)
  - create(todo: object)
