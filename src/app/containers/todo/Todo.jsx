@@ -58,7 +58,7 @@ class Todo extends Component {
   onRemoveItem = (removedTodo) => {
     store.dispatch({
       type: TODO_REMOVE,
-      payload: removedTodo.get('id'),
+      payload: removedTodo.id,
     });
   }
 

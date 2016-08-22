@@ -1,36 +1,36 @@
-import { Map, List } from 'immutable';
 import { TODO_ADD, TODO_REMOVE, TODO_TOGGLE_ISDONE } from '../constants/todoCrud';
 
 const initialState = {
   selectedTodo: undefined,
-  list: List.of(
-    Map({
+  list: [
+    {
       id: 0,
       title: 'Apprendre React',
       description: 'Formation de 3 jours',
       isDone: false,
-    }),
-    Map({
+    },
+    {
       id: 1,
       title: 'Ranger le bureau',
       description: 'ne pas oublier les tiroirs',
       idDone: false,
-    }),
-  ),
+    },
+  ],
 };
 
 export default (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case TODO_ADD:
-      state.list = state.list.push(Map(action.payload));
+      state.list = [...state.list, payload];
       break;
     case TODO_REMOVE:
-      state.list = state.list.filter(todo => todo.get('id') !== action.payload);
+      state.list = state.list.filter(todo => todo.id !== payload);
       break;
     case TODO_TOGGLE_ISDONE:
       state.list = state.list.map(todo => {
-        return todo.get('id') === action.payload.get('id')
-          ? action.payload.update('isDone', value => !value)
+        return todo.id === payload.id
+          ? Object.assign(payload, { isDone: !payload.isDone })
           : todo;
       });
       break;
