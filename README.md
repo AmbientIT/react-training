@@ -28,9 +28,14 @@ this.state = {
 };
 ```
 
-Créer un comosant React
+Créer un composant React
  - TodoList
 
 TodoListContainer est un wrapper pour TodoList.
+
+TodoListContainer doit disposer de deux méthodes:
+ - onTodoUpdate(todo: Object)
+ - onTodoRemove(id: number)
+implémenter ces méthodes et les passer au component TodoList en props et les binder sur les bouttons
 
 Ce component doit recevoir le tableau en props et afficher les données en utilisant les composants réalisés precedement

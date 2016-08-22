@@ -4,7 +4,7 @@ const styles = {
   borderRadius: '50%',
 };
 
-const TodoImage = ({ src, size }) => {
+const CardImage = ({ src, size }) => {
   return (
     <img
       style={styles}
@@ -17,7 +17,7 @@ const TodoImage = ({ src, size }) => {
   );
 };
 
-TodoImage.propTypes = {
+CardImage.propTypes = {
   /**
    * L'url de l'image
    */
@@ -27,9 +27,9 @@ TodoImage.propTypes = {
    */
   size: PropTypes.number,
 };
-TodoImage.defaultProps = {
+CardImage.defaultProps = {
   src: './img/placeholder.svg',
   size: 96,
 };
 
-export default TodoImage;
+export default CardImage;
