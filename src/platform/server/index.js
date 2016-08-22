@@ -40,7 +40,7 @@ function setMockRouter(server, mocks) {
 
 const server = jsonServer.create();
 server.set('view engine', 'ejs');
-server.use(morgan('dev', { skip: req => req.path.match(/^\/__what/) }));
+server.use(morgan('dev', { skip: req => req.path.match(/^\/sockjs/) }));
 server.use('/public', express.static('public'));
 server.use(bodyParser.json());
 server.use(webpackDevInstance);

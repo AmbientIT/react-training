@@ -1,7 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import * as todoActions from '../../actions/todoCrud';
 import TodoForm from '../../components/todoForm/TodoForm';
@@ -13,39 +12,26 @@ const mapStateToProps = ({ todos }) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(todoActions, dispatch);
 
-@connect(mapStateToProps, mapDispatchToProps)
-class Todo extends Component {
-  static propTypes = {
-    addTodo: PropTypes.func,
-    removeTodo: PropTypes.func,
-    todoTogleIsDone: PropTypes.func,
-    list: PropTypes.array,
-  }
+const Todo = ({ todoTogleIsDone, removeTodo, addTodo, list }) => {
+  return (
+    <div>
+      <TodoForm
+        onSubmit={addTodo}
+      />
+      <TodoList
+        list={list}
+        removeItem={removeTodo}
+        updateItem={todoTogleIsDone}
+      />
+    </div>
+  );
+};
 
-  onFormSubmit = (todo) => {
-    this.props.addTodo(Object.assign({
-      id: Date.now(),
-      isDone: false,
-    }, todo));
-  }
+Todo.propTypes = {
+  addTodo: PropTypes.func,
+  removeTodo: PropTypes.func,
+  todoTogleIsDone: PropTypes.func,
+  list: PropTypes.array,
+};
 
-  render() {
-    const { onFormSubmit } = this;
-    const { todoTogleIsDone, removeTodo, list } = this.props;
-
-    return (
-      <div>
-        <TodoForm
-          onSubmit={onFormSubmit}
-        />
-        <TodoList
-          list={list}
-          removeItem={removeTodo}
-          updateItem={todoTogleIsDone}
-        />
-      </div>
-    );
-  }
-}
-
-export default Todo;
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);

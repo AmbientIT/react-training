@@ -13,7 +13,7 @@ export const addTodo = todo => {
 export const removeTodo = todo => {
   return {
     type: TODO_REMOVE,
-    payload: todo.get('id'),
+    payload: todo.id,
   };
 };
 

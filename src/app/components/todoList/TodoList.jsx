@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { Card, Button } from '../_ui';
 
@@ -17,10 +16,10 @@ const TodoList = ({ list, removeItem, updateItem }) => {
           return list.map((todo, idx) => {
             return (
               <Card key={idx}>
-                <h3 className={todo.get('isDone') ? 'todo-done' : 'todo-undone'}>
-                  {todo.get('title')}
+                <h3 className={todo.isDone ? 'todo-done' : 'todo-undone'}>
+                  {todo.title}
                 </h3>
-                <p>{todo.get('description')}</p>
+                <p>{todo.description}</p>
                 <p>
                   <Button
                     status="danger"
@@ -50,14 +49,7 @@ TodoList.propTypes = {
   /**
    * Tableau de todo à afficher
    */
-  list: ImmutablePropTypes.listOf(
-    ImmutablePropTypes.contains({
-      id: PropTypes.number,
-      title: PropTypes.string,
-      description: PropTypes.string,
-      isDone: PropTypes.bool,
-    })
-  ),
+  list: PropTypes.array,
   /**
    * Les fonctions à appeler au clic sur les bouttons
    */
