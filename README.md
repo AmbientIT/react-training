@@ -1,12 +1,11 @@
 # Ambient IT React Training
 
-#### Exercice 7
+#### Exercice 8 redux-form
 
 ### Installation
 ```sh
-npm i redux-thunk -S
+npm i axios -S
 ```
-installer le plugin chrome redux
 
 ### Instructions
 Dans le repertoire src/app/services creer un fichier todoHttpApi qui expose plusieurs methode:
