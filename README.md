@@ -22,7 +22,7 @@ this.state = {
       id: 1,
       title: 'Ranger le bureau',
       description: 'ne pas oublier les tiroirs',
-      idDone: false,
+      isDone: false,
     },
   ],
 };
