@@ -19,52 +19,23 @@ class Todo extends Component {
     addTodo: PropTypes.func,
     removeTodo: PropTypes.func,
     todoTogleIsDone: PropTypes.func,
-    list: ImmutablePropTypes.listOf(
-      ImmutablePropTypes.contains({
-        id: PropTypes.number,
-        title: PropTypes.string,
-        description: PropTypes.string,
-        isDone: PropTypes.bool,
-      })
-    ),
-  }
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      title: '',
-      description: '',
-    };
+    list: PropTypes.array,
   }
 
-  onInputChange = (id, val) => {
-    this.setState({
-      [id]: val,
-    });
-  }
-
-  onFormSubmit = () => {
-    this.props.addTodo({
-      title: this.state.title,
-      description: this.state.description,
-    });
-    this.setState({
-      title: '',
-      description: '',
-    });
+  onFormSubmit = (todo) => {
+    this.props.addTodo(Object.assign({
+      id: Date.now(),
+      isDone: false,
+    }, todo));
   }
 
   render() {
-    const { onInputChange, onFormSubmit } = this;
-    const { title, description } = this.state;
+    const { onFormSubmit } = this;
     const { todoTogleIsDone, removeTodo, list } = this.props;
 
     return (
       <div>
         <TodoForm
-          titleValue={title}
-          descriptionValue={description}
-          onInputChange={onInputChange}
           onSubmit={onFormSubmit}
         />
         <TodoList

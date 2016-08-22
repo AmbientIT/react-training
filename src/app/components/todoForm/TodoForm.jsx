@@ -7,7 +7,6 @@ const TodoForm = (props) => {
     titleValue,
     descriptionValue,
     onSubmit,
-    onInputChange,
   } = props;
 
   return (
@@ -35,13 +34,9 @@ const TodoForm = (props) => {
 TodoForm.propTypes = {
   titleValue: PropTypes.string,
   descriptionValue: PropTypes.string,
-  onInputChange: PropTypes.func,
   onSubmit: PropTypes.func,
 };
 TodoForm.defaultProps = {
-  titleValue: '',
-  descriptionValue: '',
-  onInputChange: () => {},
   onSubmit: () => {},
 };
 
