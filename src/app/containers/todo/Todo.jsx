@@ -11,8 +11,6 @@ class Todo extends Component {
     super(props);
 
     this.state = {
-      title: '',
-      description: '',
       list: store.getState().todos.list,
     };
   }
@@ -29,22 +27,13 @@ class Todo extends Component {
     this.unsubscribeStore();
   }
 
-  onInputChange = (id, val) => {
-    this.setState({
-      [id]: val,
-    });
-  }
-
-  onFormSubmit = () => {
-    const { title, description } = this.state;
+  onFormSubmit = (todo) => {
     store.dispatch({
       type: TODO_ADD,
-      payload: {
+      payload: Object.assign({
         id: Date.now(),
-        title,
-        description,
         isDone: false,
-      },
+      }, todo),
     });
   }
 
@@ -63,15 +52,12 @@ class Todo extends Component {
   }
 
   render() {
-    const { onRemoveItem, onUpdateItem, onInputChange, onFormSubmit } = this;
-    const { title, description, list } = this.state;
+    const { onRemoveItem, onUpdateItem, onFormSubmit } = this;
+    const { list } = this.state;
 
     return (
       <div>
         <TodoForm
-          titleValue={title}
-          descriptionValue={description}
-          onInputChange={onInputChange}
           onSubmit={onFormSubmit}
         />
         <TodoList
