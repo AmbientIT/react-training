@@ -31,6 +31,7 @@ class Todo extends Component {
     this.setState({
       list: [...list, Object.assign({
         id: list[list.length - 1].id + 1,
+        isDone: false,
       }, createdTodo)],
     });
   }

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
 export const Input = ({ id, type, onChange, value, placeholder }) => {
-  console.log(id, type, onChange, value, placeholder);
   return (
     <input
       id={id}

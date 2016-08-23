@@ -46,9 +46,6 @@ class TodoForm extends Component {
 }
 
 TodoForm.propTypes = {
-  titleValue: PropTypes.string,
-  descriptionValue: PropTypes.string,
-  onInputChange: PropTypes.func,
   onSubmit: PropTypes.func,
 };
 TodoForm.defaultProps = {
