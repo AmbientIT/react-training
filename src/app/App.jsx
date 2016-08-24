@@ -1,17 +1,16 @@
 import React from 'react';
 import config from './_config';
 
-import Todo from './containers/Todo';
-
+import Navbar from './components/navbar/Navbar';
 import './styles/bass.css';
 import './styles/main.css';
 
-export default () => {
+export default ({ children }) => {
   return (
     <section>
       <h1>{config.APP_TITLE}</h1>
-      <div>Webpack is doing its thing with React and ES2015</div>
-      <Todo />
+      <Navbar />
+      {children}
     </section>
   );
 };
