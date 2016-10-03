@@ -4,29 +4,30 @@
 
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 const ENV = require('yargs').argv.env || 'development';
 
 module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
   resolve: {
-    extensions: ['', '.jsx', '.js', '.json'],
-    modulesDirectories: ['node_modules']
+    extensions: ['.jsx', '.js', '.json'],
+    modules: ['node_modules'],
   },
   module: {
-    preLoaders: [
-     {
-       test: /\.jsx|.js$/,
-       loaders: ['eslint-loader', 'source-map-loader'],
-       exclude: /node_modules/,
-     },
-   ],
-    loaders: [
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.jsx|.js$/,
+        exclude: /node_modules/,
+        loaders: ['eslint-loader', 'source-map-loader'],
+      },
       {
         test: /\.jsx|.js$/,
         exclude: /node_modules/,
         loader: "babel",
         query: {
-          presets: [ 'es2015-native-modules', 'stage-0', 'react' ],
-          plugins: ['transform-decorators-legacy'],
+          presets: [ 'es2015-native-modules', 'stage-0', 'react' ]
         }
       },
       {
@@ -56,6 +57,6 @@ module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
       'process.env': {
         'NODE_ENV': `"${ENV}"`
       }
-    }),
+    })
   ]
 })
