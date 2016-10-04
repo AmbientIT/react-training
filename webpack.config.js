@@ -8,18 +8,18 @@ const ENV = require('yargs').argv.env || 'development';
 
 module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
   resolve: {
-    extensions: ['', '.jsx', '.js', '.json'],
-    modulesDirectories: ['node_modules']
+    extensions: ['.jsx', '.js', '.json'],
+    modules: ['node_modules']
   },
   module: {
-    preLoaders: [
-     {
-       test: /\.jsx|.js$/,
-       loaders: ['eslint-loader', 'source-map-loader'],
-       exclude: /node_modules/,
-     },
-   ],
-    loaders: [
+  //   preLoaders: [
+  //    {
+  //      test: /\.jsx|.js$/,
+  //      loaders: ['eslint-loader', 'source-map-loader'],
+  //      exclude: /node_modules/,
+  //    },
+  //  ],
+    rules: [
       {
         test: /\.jsx|.js$/,
         exclude: /node_modules/,

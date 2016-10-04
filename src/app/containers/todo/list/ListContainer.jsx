@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import * as todoActions from '../../../actions/todoCrud';
 import TodoForm from '../../../components/todoForm/TodoForm';
@@ -18,8 +17,8 @@ export default class TodoListContainer extends Component {
     removeTodo: PropTypes.func,
     resetSelected: PropTypes.func,
     todoTogleIsDone: PropTypes.func,
-    list: ImmutablePropTypes.listOf(
-      ImmutablePropTypes.contains({
+    list: PropTypes.arrayOf(
+      PropTypes.shape({
         id: PropTypes.number,
         title: PropTypes.string,
         description: PropTypes.string,

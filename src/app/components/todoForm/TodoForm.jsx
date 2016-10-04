@@ -41,7 +41,7 @@ const validate = values => {
     fields: ['title', 'description'],
     validate,
   },
-  state => ({ initialValues: state.todos.selectedTodo.toObject() }),
+  state => ({ initialValues: state.todos.selectedTodo }),
 )
 export default class TodoForm extends Component {
   static propTypes = {

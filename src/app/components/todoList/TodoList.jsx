@@ -1,12 +1,11 @@
 import React, { PropTypes, Component } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { Card, Button } from '../_ui';
 
 export default class TodoList extends Component {
   static propTypes = {
-    list: ImmutablePropTypes.listOf(
-      ImmutablePropTypes.contains({
+    list: PropTypes.arrayOf(
+      PropTypes.shape({
         id: PropTypes.number,
         title: PropTypes.string,
         description: PropTypes.string,
@@ -26,7 +25,7 @@ export default class TodoList extends Component {
   }
 
   gotToEditView = (todo) => {
-    this.context.router.push(`/edit/${todo.get('id')}`);
+    this.context.router.push(`/edit/${todo.id}`);
   }
 
   render() {
@@ -44,10 +43,10 @@ export default class TodoList extends Component {
             return list.map((todo, idx) => {
               return (
                 <Card key={idx}>
-                  <h3 className={todo.get('isDone') ? 'todo-done' : 'todo-undone'}>
-                    {todo.get('title')}
+                  <h3 className={todo.isDone ? 'todo-done' : 'todo-undone'}>
+                    {todo.title}
                   </h3>
-                  <p>{todo.get('description')}</p>
+                  <p>{todo.description}</p>
                   <p>
                     <Button
                       status="danger"

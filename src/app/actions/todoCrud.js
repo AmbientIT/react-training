@@ -52,7 +52,8 @@ export const updateTodo = todo => dispatch => {
 };
 
 export const todoTogleIsDone = todo => dispatch => {
-  return todoHttp.update(todo.update('isDone', isDone => !isDone))
+  todo.isDone = !todo.isDone;
+  return todoHttp.update(todo)
     .then(updatedTodo => dispatch({
       type: TODO_TOGGLE_ISDONE,
       payload: updatedTodo,

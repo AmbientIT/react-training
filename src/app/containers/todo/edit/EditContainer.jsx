@@ -6,7 +6,7 @@ import { updateTodo, findOne, resetSelected } from '../../../actions/todoCrud';
 import TodoForm from '../../../components/todoForm/TodoForm';
 
 @connect(
-  ({ todos: { selectedTodo } }) => ({ selectedTodo: selectedTodo.toObject() }),
+  ({ todos: { selectedTodo } }) => ({ selectedTodo }),
   dispatch => bindActionCreators({ updateTodo, findOne, resetSelected }, dispatch)
 )
 export default class TodoEditContainer extends Component {
