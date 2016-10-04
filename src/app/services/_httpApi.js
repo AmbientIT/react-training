@@ -1,55 +1,72 @@
-import axios from 'axios';
+import fetchIntercept from 'fetch-intercept';
+import qs from 'jquery-param';
 import config from '../_config';
 
-const apiHttp = axios.create({
-  baseURL: config.APIURL,
-  headers: {
-    'Content-type': 'application/json',
+const apiHeaders = new Headers({
+  'Content-Type': 'application/json',
+});
+
+fetchIntercept.register({
+  request(url, httpConfig) {
+    console.log('httpConfig', httpConfig);
+    // httpConfig.headers.append(
+    //   'Authorization',
+    //   `Bearer ${localStorage.getItem('token')}`
+    // );
+    return [url, httpConfig];
+  },
+  requestError(error) {
+    console.error('http request error : ', error);
+    return Promise.reject(error);
+  },
+  response(response) {
+    return response.json();
+  },
+  responseError(error) {
+    console.error('http response error : ', error);
+    return Promise.reject(error);
   },
 });
 
-const apiHttpInterceptor = httpConfig => {
-  // console.log('request intercept', httpConfig);
-  // Do something before request is sent
-  return httpConfig;
-};
-
-const apiHttpResponseInterceptor = response => {
-  // console.log('http response ', response);
-  return Promise.resolve(response.data);
-};
-
-const httpErrorHandler = error => {
-  console.error('http error', error);
-  return Promise.reject(error);
-};
-
-apiHttp.interceptors.request.use(apiHttpInterceptor, httpErrorHandler);
-apiHttp.interceptors.response.use(apiHttpResponseInterceptor, httpErrorHandler);
-
 export default class HttpApi {
   constructor(resource) {
-    this.uri = `/${resource}`;
-    this.http = apiHttp;
+    this.uri = `${config.APIURL}/${resource}`;
   }
 
-  findAll(params) {
-    return this.http.get(this.uri, { params });
+  findAll(params = {}) {
+    return fetch(`${this.uri}?${qs(params)}`, {
+      method: 'GET',
+      headers: apiHeaders,
+    });
   }
 
   findOne(id, params = {}) {
-    return this.http.get(`${this.uri}/${id}`, { params });
+    return fetch(`${this.uri}/${id}?${qs(params)}`, {
+      method: 'GET',
+      headers: apiHeaders,
+    });
   }
 
   create(item) {
-    return this.http.post(this.uri, item);
+    return fetch(this.uri, {
+      method: 'POST',
+      headers: apiHeaders,
+      body: JSON.stringify(item),
+    });
   }
 
   destroy(id) {
-    return this.http.delete(`${this.uri}/${id}`);
+    return fetch(`${this.uri}/${id}`, {
+      method: 'DELETE',
+      headers: apiHeaders,
+    });
   }
 
   update(item) {
-    return this.http.put(`${this.uri}/${item.id || item.get('id')}`, item);
+    return fetch(`${this.uri}/${item.id}`, {
+      method: 'PUT',
+      headers: apiHeaders,
+      body: JSON.stringify(item),
+    });
   }
 }

@@ -36,10 +36,10 @@ export const addTodo = todo => dispatch => {
 };
 
 export const removeTodo = todo => dispatch => {
-  return todoHttp.destroy(todo.get('id'))
+  return todoHttp.destroy(todo.id)
     .then(() => dispatch({
       type: TODO_REMOVE,
-      payload: todo.get('id'),
+      payload: todo.id,
     }));
 };
 
