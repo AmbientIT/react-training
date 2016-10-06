@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createLogger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 import rootReducer from '../reducers';
 
 const isDev = process.env.NODE_ENV === 'development';
 
 function getMiddleware() {
-  const middleware = [];
+  const middleware = [thunk];
 
   return isDev
     ? applyMiddleware(...[...middleware, createLogger()])

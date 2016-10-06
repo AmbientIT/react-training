@@ -12,26 +12,34 @@ const mapStateToProps = ({ todos }) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(todoActions, dispatch);
 
-const Todo = ({ todoTogleIsDone, removeTodo, addTodo, list }) => {
-  return (
-    <div>
-      <TodoForm
-        onSubmit={addTodo}
-      />
-      <TodoList
-        list={list}
-        removeItem={removeTodo}
-        updateItem={todoTogleIsDone}
-      />
-    </div>
-  );
-};
+class TodoListContainer extends React.Component {
+  componentWillMount() {
+    this.props.fetchTodo();
+  }
 
-Todo.propTypes = {
+  render() {
+    const { todoTogleIsDone, removeTodo, addTodo, list } = this.props;
+    return (
+      <div>
+        <TodoForm
+          onSubmit={addTodo}
+        />
+        <TodoList
+          list={list}
+          removeItem={removeTodo}
+          updateItem={todoTogleIsDone}
+        />
+      </div>
+    );
+  }
+}
+
+TodoListContainer.propTypes = {
+  fetchTodo: PropTypes.func,
   addTodo: PropTypes.func,
   removeTodo: PropTypes.func,
   todoTogleIsDone: PropTypes.func,
   list: PropTypes.array,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todo);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListContainer);

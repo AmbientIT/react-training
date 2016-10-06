@@ -18,14 +18,7 @@ module.exports = function(config) {
       devtool: 'inline-source-map',
       resolve: webpackConfig.resolve,
       module: {
-        loaders: webpackConfig.module.loaders,
-        postLoaders: [
-          {
-           test: /\.js$/,
-           exclude: /node_modules/,
-           loader: 'istanbul-instrumenter',
-         }
-       ]
+        rules: webpackConfig.module.loaders,
       },
       externals: {
         'react/lib/ExecutionEnvironment': true,

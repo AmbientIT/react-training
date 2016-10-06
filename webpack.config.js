@@ -53,6 +53,14 @@ module.exports = webpackMerge.smart(require(`./webpack/${ENV}`), {
     ]
   },
   plugins: [
+    new CopyWebpackPlugin([{
+      from: 'src/assets',
+      to: ''
+    }]),
+    new HtmlWebpackPlugin({
+      template: path.resolve(process.cwd(), 'src/index.html'),
+      inject: 'body'
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': `"${ENV}"`
